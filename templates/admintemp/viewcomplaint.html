@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Counselors</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        .btn.accept {
+            background-color: #28a745; /* Green */
+        }
+        
+        .btn.reject {
+            background-color: #dc3545; /* Red */
+        }
+        
+        .btn:hover {
+            opacity: 0.8;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <h2>Complaints</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Login_id</th>
+                    <th>username</th>
+                    <th>phone</th>
+
+                    <th>complaints</th>
+                    <th></th>
+                   
+                    
+                    
+                </tr>
+                <tbody>
+                    {% for i in k %}
+                        <tr>
+                            <td>{{ i.login_id }}</td>
+                            <td>{{ i.login_id.usertable.name }}</td>
+                            
+                            
+                           
+                           
+                            <td> {{i.login_id.usertable.phone}}</td>
+                            <td> {{i.complaint}}</td>
+                           
+                            <td>
+                                {% if not i.reply %}
+                                    <a href="{% url 'complaintreply' i.id %}">reply</a>
+                                {% else %}
+                                    replied
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                        
+                </tbody>
+            </thead>
+           
+        </table>
+    </main>
+</body>
+</html>
