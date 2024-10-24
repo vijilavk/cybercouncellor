@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'account_app',
     'councellor_app',
     'admin_app',
-    'user_app'
+    'user_app',
+    'rest_framework'
     
 ]
 
@@ -128,3 +129,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='account_app.Logintable'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# MEDIA_URL is the URL that will serve the media files. This is used to access media from the browser.
+MEDIA_URL = '/media/'

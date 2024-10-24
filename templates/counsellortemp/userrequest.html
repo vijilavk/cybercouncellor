@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Requests</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .request-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .request-table th, .request-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .request-table th {
+            background-color: #f8f8f8;
+        }
+
+        .request-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .request-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .request-table td {
+            color: #555;
+        }
+
+        .request-table th {
+            color: #000;
+        }
+
+        .accept-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .accept-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Requests</h1>
+        <table class="request-table">
+            <thead>
+                <tr>
+                    
+                    <th>User name</th>
+                    <th>age</th>
+                    <th>place</th>
+                    <th>gender</th>
+                    <th>phone</th>
+                    <th>email</th>
+                    <th>councellor_id</th>
+                    <th>user_id</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for i in requests %}
+                <!-- Example static rows, dynamically generated rows should be rendered here from your backend -->
+                <tr>
+                    <td>{{ i.user_logid.usertable.name }}</td>
+                    <td>{{ i.user_logid.usertable.age }}</td>
+                    <td>{{ i.user_logid.usertable.place }}</td>
+                    <td>{{ i.user_logid.usertable.gender }}</td>
+                    <td>{{ i.user_logid.usertable.phone }}</td>
+                    <td>{{ i.user_logid.usertable.email }}</td>
+                    <td>{{i.councellor_logid}}</td>
+                    <td>{{i.user_logid}}</td>
+                    {% comment %} <td>i.user_logid.place</td>
+                    <td>i.user_logid.phone</td>
+                    <td>i.user_logid.email</td> {% endcomment %}
+                    
+                    {% if i.request_status == "pending" %}
+                    <!-- Show Accept and Reject buttons for pending users -->
+                    <td> <a href="{% url 'userrequestaccept12' i.id %}">Accept</a></td>
+                {% else %}
+                    <!-- Show that the user is accepted -->
+                    <td> <span>Accepted</span>  </td>
+                   {%endif%}
+                </tr>
+                {%endfor%}
+                <!-- You would replace these rows with a loop in Django template or any other framework -->
+            </tbody>
+        </table>
+    </div>
+
+    
+</body>
+</html>

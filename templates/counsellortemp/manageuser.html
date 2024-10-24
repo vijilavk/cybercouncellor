@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage users</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        .btn.accept {
+            background-color: #28a745; /* Green */
+        }
+        
+        .btn.reject {
+            background-color: #dc3545; /* Red */
+        }
+        
+        .btn:hover {
+            opacity: 0.8;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Manage users</h1>
+    </header>
+    <main>
+        <h2>Users Applications</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Login_id</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Place</th>
+                    
+                    <th>Phone</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in k %}
+                    <tr>
+                        <td>{{  i.user_logid.usertable.login_id }}</td>
+                        <td>{{ i.user_logid.usertable.name }}</td>
+                        <td>{{ i.user_logid.usertable.age }}</td>
+                        <td>{{ i.user_logid.usertable.gender }}</td>
+                        <td>{{ i.user_logid.usertable.email}} </td>
+                        <td> {{ i.user_logid.usertable.place}}</td>
+                       
+                        <td> {{ i.user_logid.usertable.phone}}</td>
+                        {% endfor %}
+                        
+                        {% comment %} <td>
+                            {% if i.login_id.user_type == "PENDING" %}
+                                <!-- Show Accept and Reject buttons for pending users -->
+                                <a href="{% url 'acceptuser' i.login_id %}" class="btn accept">Accept</a>
+                                <a href="{% url 'rejectuser' i.login_id %}" class="btn reject">Reject</a>
+                            {% elif i.login_id.user_type == "User" %}
+                                <!-- Show that the user is accepted -->
+                                Accepted
+                                <a href="{% url 'rejectuser' i.login_id %}" class="btn reject">Reject</a>
+                            {% elif i.login_id.user_type == "Rejected" %}
+                                <!-- Show that the user is rejected -->
+                                Rejected
+                                <a href="{% url 'acceptuser' i.login_id %}" class="btn accept">Accept</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %} {% endcomment %}
+                    
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

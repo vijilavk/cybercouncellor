@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth import authenticate
+from account_app.form import councellor
 from account_app.models import Councellortable, Logintable, Token
 
 # Create your views here.
@@ -17,7 +18,7 @@ class Login(View):
         print("$$$$$$$$$$$$$$$$$$$$$")
         response_dict = {"success": False}
         landing_page_url = {
-            "COUNCELLOR": "councellorhome",
+            "Councellor": "councellor12/councellor",
             "ADMIN": "admin12/adminhome"     
             # main url l kodutha name specify cheyyanam 
         }
@@ -62,6 +63,9 @@ class Login(View):
             }
             print(user)
             print(user.user_type)
+            print(f"4444444444444444User Type: {user.user_type}")
+            print("session",request.session["data"]["user_id"])
+            print(f"77777777777777777Landing Page URLs: {landing_page_url}")
             return redirect(landing_page_url[user.user_type])
         else:
             response_dict["reason"] = "Invalid credentials."
@@ -73,7 +77,7 @@ class Registercouncellor(View):
         return render(request, 'counsellortemp/counsellorreg.html')
 
     def post(self, request):
-        frm = Councellortable(request.POST)
+        frm = councellor(request.POST)
         if frm.is_valid():
             councellorform = frm.save(commit=False)
             lo = Logintable.objects.create_user(username=request.POST["username"], password=request.POST["password"])
